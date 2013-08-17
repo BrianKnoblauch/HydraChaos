@@ -64,7 +64,7 @@ OBJ
 ' PUBLIC FUNCTIONS /////////////////////////////////////////////////////
 '///////////////////////////////////////////////////////////////////////
 
-PUB start | i, dx, dy, x, y, color
+PUB start | i, dx, dy, x, y
 
   'start tv
   longmove(@tv_status, @tvparams, paramcount)
@@ -141,4 +141,4 @@ tvparams                long    0               'status
                         long    0               'ho
                         long    0               'vo
                         long    55_250_000      'broadcast on channel 2 VHF, each channel is 6 MHz above the previous
-                       long    0               'auralcog
+                        long    0               'auralcog
