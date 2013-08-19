@@ -12,7 +12,7 @@
 
 CON
 
-  _clkmode = xtal2 + pll8x            ' enable external clock and pll times 4
+  _clkmode = xtal2 + pll8x            ' enable external clock and pll
   _xinfreq = 10_000_000 + 0000        ' set frequency to 10 MHZ plus some error
   _stack = ($3000 + $3000 + 64) >> 2  'accomodate display memory and stack
 
