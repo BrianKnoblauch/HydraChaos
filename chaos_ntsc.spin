@@ -1,7 +1,7 @@
 ' //////////////////////////////////////////////////////////////////////
 ' Chaos - NTSC
 ' AUTHOR: Brian Knoblauch
-' LAST MODIFIED: 8.16.2013
+' LAST MODIFIED: 8.19.2013
 ' VERSION 1.0
 '
 ' //////////////////////////////////////////////////////////////////////
@@ -26,7 +26,15 @@ CON
   Y_TILES           = 12
   
   SCREEN_WIDTH      = 256
-  SCREEN_HEIGHT     = 192 
+  SCREEN_HEIGHT     = 192
+
+  COL_Black     = %0000_0010
+  COL_White     = %0000_0111
+
+  COLOR_0 = (COL_Black << 0)
+  COLOR_1 = (COL_White << 8)
+  COLOR_2 = (COL_Black << 16)
+  COLOR_3 = (COL_Black << 24)
 
 '///////////////////////////////////////////////////////////////////////
 ' VARIABLES SECTION ////////////////////////////////////////////////////
@@ -74,7 +82,7 @@ PUB start | i, dx, dy, x, y
 
   'init colors
   repeat i from 0 to 64
-    colors[i] := $FB06CC02
+    colors[i] := COLOR_3 | COLOR_2 | COLOR_1 | COLOR_0
     
   'init tile screen
   repeat dx from 0 to tv_hc - 1
@@ -88,13 +96,12 @@ PUB start | i, dx, dy, x, y
   ' BEGIN GAME LOOP ////////////////////////////////////////////////////
 
   ' initialize some vars
-  x := SCREEN_WIDTH/2
-  y := SCREEN_HEIGHT/2
+  x := SCREEN_WIDTH << 1
+  y := SCREEN_HEIGHT << 1
 
   'clear the onscreen buffer
   gr.clear
-
-  gr.colorwidth(2,0)
+  gr.colorwidth(1,0)  
   
   ' infinite loop
   repeat while TRUE
@@ -104,14 +111,14 @@ PUB start | i, dx, dy, x, y
     random:=?random
     direction:=random//3
     if direction==0
-      x:=(x+(SCREEN_WIDTH/2))/2
-      y:=(y+SCREEN_HEIGHT)/2
+      x:=(x+(SCREEN_WIDTH/2))>>1
+      y:=(y+SCREEN_HEIGHT)>>1
     elseif direction==1
-      x:=x/2
-      y:=y/2
+      x:=x>>1
+      y:=y>>1
     elseif direction==2
-      x:=(x+SCREEN_WIDTH)/2
-      y:=y/2
+      x:=(x+SCREEN_WIDTH)>>1
+      y:=y>>1
     gr.plot(x, y)
     
     ' synchronize to frame rate would go here...
