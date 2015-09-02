@@ -1,4 +1,4 @@
 HydraChaos
 ==========
 
-Chaos program for Propeller powered Hydra.  NTSC and VGA versions.
+Chaos program for Propeller powered Hydra.  NTSC version only (VGA version abandoned).
